@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<script type="text/javascript" src="angular/angular.min.js" ></script>
+<script type="text/javascript" src="js/file.js" ></script>
+<link rel="stylesheet" type="text/css" href="boot1/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="css/style.css">
+<body>
+ <div ng-controller="springRest">
+ 
+   <div class="panel panel-info" >
+<div class="panel-heading">JSON</div>
+   <div class="panel-body">
+   {{produits}}
+   </div>
+   </div> 
+
+<!--  <div class="container spacer">-->
+
+<div class="panel panel-info" ng-show="!update">
+<div class="panel-heading">List Produits</div>
+   <div class="panel-body">
+		<label>motcle</label><input type="text" ng-model="motCle">
+		<button class="button" ng-click="charger()">charger</button>
+						<button type="button" class="btn btn-success btn-lg" ng-click="charger()">
+				     		<span class="glyphicon glyphicon-search" ></span> 
+				  		</button>
+		<!-- <div class="well">-->
+		   <table class="table table-striped">
+		   <h1>List des Prdoduits</h1>
+		   
+		   <tr><th>ref</th><th>designation</th><th>prix</th></tr>
+		  <tr ng-repeat="list in produits">
+		    <td>{{list.ref}}</td>
+		    <td>{{list.designation}}</td>
+		    <td>{{list.prix}}</td>
+			    <td>
+			    		
+			    		<button type="button" class="btn btn-success btn-lg" ng-click="editer(list.ref,list.designation,list.prix)">
+				     		<span class="glyphicon glyphicon-pencil" ></span> 
+				  		</button>
+			    </td>
+		    <td>
+		    		
+		    		<button type="button" class="btn btn-danger btn-lg" ng-click="supprimer(list.ref)" >
+				    	 <span class="glyphicon glyphicon-remove" ></span> 
+				  	</button>
+		    </td>
+		  
+		  </tr> 
+		
+		  </table>
+		  </div>
+		   
+		   
+		   <ul class="nav nav-pills">
+		   <li ng-class="{active:$index==nbpage}"  class="clickable" ng-repeat="p in pages track by $index">
+		    <a ng-click="goto($index)">{{$index}}</a>
+		    
+		    </li>
+		   </ul>
+          
+          </div>
+
+<!-- 
+update produit
+-->
+<div class="panel panel-info" ng-show="update">
+	<div class="panel-heading">modifier Produit</div>
+	<div class="panel-body">
+		<table class="table">
+		
+		<tbody>
+		<input type="hidden" ng-model="ref"></td></tr>
+		<tr><td>designation</td><td><input type="text" ng-model="designation1"></td></tr>
+		<tr><td>prix</td><td><input type="number" ng-model="prix1"></td></tr>
+		</tbody>
+		</table>
+	    <button ng-click="modifier()" class="boutton">modifier</button>
+	</div> 
+
+</div>
+
+         
+<!-- 
+ajouter produit
+-->
+<div class="panel panel-info">
+	<div class="panel-heading">Ajout Produit</div>
+	   <div class="panel-body">
+		<table class="table">
+		
+		<tbody>
+		<tr><td>designation</td><td><input type="text" ng-model="designation"></td></tr>
+		<tr><td>prix</td><td><input type="number" ng-model="prix"></td></tr>
+		</tbody>
+		</table>
+		<button ng-click="ajouter()" class="boutton">Ajouter</button>
+	</div> 
+
+</div>
+
+
+
+  </div>
+</body>
+</html>
